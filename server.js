@@ -27,7 +27,9 @@ io.on("connection", socket => {
   players[socket.id] = {
     x: Math.random() * 500,
     y: Math.random() * 500,
-    name: "Guest"
+    name: "Guest",
+    color: "#ff0000"
+
   }
 
   io.emit("players", players)
@@ -42,6 +44,11 @@ io.on("connection", socket => {
 
     io.emit("players", players)
   })
+  socket.on("setColor", (color) => {
+  if (players[socket.id]) {
+    players[socket.id].color = color
+  }
+})
 
   socket.on("move", data => {
     const p = players[socket.id]
