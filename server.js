@@ -47,6 +47,7 @@ io.on("connection", socket => {
   socket.on("setColor", (color) => {
   if (players[socket.id]) {
     players[socket.id].color = color
+    io.emit("players", players)
   }
 })
 
